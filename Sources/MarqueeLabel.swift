@@ -1514,10 +1514,11 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
     
     override open var numberOfLines: Int {
         get {
-            return super.numberOfLines
+            return sublabel.numberOfLines
         }
         
         set {
+            sublabel.numberOfLines = newValue
             super.numberOfLines = newValue
         }
     }
