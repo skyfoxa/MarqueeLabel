@@ -760,7 +760,8 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         }
         
         // Check if the label string fits
-        let labelTooLarge = (sublabelSize().width + leadingBuffer) > self.bounds.size.width + CGFloat.ulpOfOne
+        let nLinesWidth =  (sublabelSize().width * max(CGFloat(self.numberOfLines), 1)) + leadingBuffer
+        let labelTooLarge =  nLinesWidth > self.bounds.size.width + CGFloat.ulpOfOne
         let animationHasDuration = speed.value > 0.0
         return (!labelize && labelTooLarge && animationHasDuration)
     }
@@ -1517,8 +1518,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         }
         
         set {
-            // By the nature of MarqueeLabel, this is 1
-            super.numberOfLines = 1
+            super.numberOfLines = newValue
         }
     }
     
